@@ -1,15 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:map_launcher/map_launcher.dart';
+import 'package:untitled1/Comment/comment_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'Comment/CommentPage.dart';
+import 'Login/LoginPageDesign.dart';
+import 'Login/auth.dart';
 import 'Model/Museum_Model.dart';
 import 'custom_cached_network_image.dart';
 
 class MuseumDetailScreen extends StatelessWidget {
   final Datum data;
-  const MuseumDetailScreen({required this.data});
+  MuseumDetailScreen({required this.data});
+  CommentServise _commentServise = CommentServise();
+  AuthService _authService = AuthService();
 
+  final TextEditingController _commentController = TextEditingController();
   Widget _showImage() {
     Widget widget;
 
@@ -34,6 +43,8 @@ class MuseumDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    IconData a = Icons.star_border;
+    double yildiz = 3;
     // TODO: implement build
     return Scaffold(
       body: Container(
@@ -130,7 +141,7 @@ class MuseumDetailScreen extends StatelessWidget {
                         ListTile(
                           title: Text("Adres : "),
                           subtitle: Text(data.muzeAdres),
-                          leading: Icon(Icons.info),
+                          leading: Icon(Icons.museum_outlined),
                         ),
                         ListTile(
                           onTap: () async {
@@ -140,13 +151,90 @@ class MuseumDetailScreen extends StatelessWidget {
                           subtitle: Text(
                             data.muzeTel,
                           ),
-                          leading: Icon(Icons.info),
+                          leading: Icon(Icons.phone),
                         ),
                         ListTile(
                           title: Text("E-Posta : "),
                           subtitle: Text(data.muzeMail),
-                          leading: Icon(Icons.info),
-                        )
+                          leading: Icon(Icons.mail),
+                        ),
+                        ListTile(
+                          //login değilse login page e yönlendir
+                          title: Text("Yorum ekle..."),
+                          leading: Icon(Icons.comment),
+                          trailing: Icon(Icons.star),
+                          onTap: () {
+                            if (_authService.CurrentUser() == null) {
+                              Get.to(() => LoginPage());
+                            } else {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                backgroundColor: Colors.white,
+                                builder: (context) => Padding(
+                                  padding: MediaQuery.of(context).viewInsets,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ListTile(
+                                          title: TextField(
+                                            controller: _commentController,
+                                            decoration: InputDecoration(
+                                                hintText: "Yorum yazınız..."),
+                                            autofocus: true,
+                                          ),
+                                          leading: CircleAvatar(
+                                              child: Icon(Icons.face)),
+                                          trailing: GestureDetector(
+                                              onTap: () {
+                                                _commentServise.addStatus(
+                                                    _authService
+                                                        .CurrentUserId(),
+                                                    yildiz,
+                                                    _commentController.text,
+                                                    data.muzeAd.toLowerCase());
+                                                _commentController.clear();
+                                                Get.back();
+                                              },
+                                              child: Icon(Icons.send)),
+                                        ),
+                                      ),
+                                      RatingBar.builder(
+                                        initialRating: 3,
+                                        minRating: 1,
+                                        direction: Axis.horizontal,
+                                        allowHalfRating: true,
+                                        itemCount: 5,
+                                        itemPadding: EdgeInsets.symmetric(
+                                            horizontal: 4.0),
+                                        itemBuilder: (context, _) => Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
+                                        ),
+                                        onRatingUpdate: (rating) {
+                                          yildiz = rating;
+                                          print(rating);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        ListTile(
+                          title: Text("Yorumlar "),
+                          leading: Icon(Icons.comment_sharp),
+                          subtitle: Text("Tüm Yorumları Görüntüle..."),
+                          onTap: () {
+                            Get.to(() => CommentPage(
+                                  data: data,
+                                ));
+                          },
+                        ),
                       ],
                     ),
                   );

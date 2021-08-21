@@ -1,37 +1,55 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'Json_Museum.dart';
+import 'package:untitled1/Json_Museum.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
-  /*final String api = 'https://tr.wikipedia.org/api/rest_v1/page/summary';
+class App extends StatefulWidget {
+  @override
+  _AppState createState() => _AppState();
+}
 
-  List<String> getLinks({required List<String> mousems}) {
-    List<String> pictures = [];
+class _AppState extends State<App> {
+  /// The future is part of the state of our widget. We should not call `initializeApp`
+  /// directly inside [build].
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
-    mousems.forEach((mouse) async {
-      final response =
-          await http.get(Uri.parse('$api/${mouse.replaceAll(' ', '_')}'));
-      pictures.add(jsonDecode(response.body)['originalimage']['source']);
-    });
-
-    return pictures;
-  }*/
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: JsonMuseum(),
+    return FutureBuilder(
+      future: _initialization,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: Scaffold(
+              body: Text("HATA-*-" + snapshot.hasError.toString()),
+            ),
+          );
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            home: JsonMuseum(),
+          );
+        }
+
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            body: CircularProgressIndicator(),
+          ),
+        );
+      },
     );
   }
 }

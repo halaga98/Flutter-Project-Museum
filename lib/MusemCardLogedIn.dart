@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,10 +12,10 @@ import 'museum_detail.dart';
 AuthService _authService = AuthService();
 CommentServise _commentServise = CommentServise();
 
-class MuseumCard extends StatelessWidget {
+class MuseumCardLogedIn extends StatelessWidget {
   final Datum data;
 
-  MuseumCard({required this.data});
+  MuseumCardLogedIn({required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -101,9 +102,67 @@ class MuseumCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 12,
-                      ),
+                      StreamBuilder(
+                          stream: _commentServise.getPerson(),
+                          builder:
+                              (BuildContext context, AsyncSnapshot snapshot) {
+                            if (!snapshot.hasData) {
+                              return Container();
+                            } else {
+                              DocumentSnapshot mypost = snapshot.data;
+                              IconData a = Icons.favorite_border_rounded;
+                              (mypost["müze"] as List).forEach((element) {
+                                if (element['ad'] == data.muzeAd) {
+                                  a = Icons.favorite;
+                                }
+                              });
+
+                              return GestureDetector(
+                                onTap: () {
+                                  //print((mypost["müze"] as List)[0]['ad']);
+                                  //var list = (mypost["müze"] as List).removeAt(0);
+                                  //_authService.DeleteFavMuseum();
+                                  print("asdasd");
+                                  if ((mypost["müze"] as List).length == 0) {
+                                    _authService.FavMuseum(
+                                        data.muzeAd, data.bresim);
+                                    a = Icons.favorite;
+                                    return;
+                                  }
+                                  for (int i = 0;
+                                      i < (mypost["müze"] as List).length;
+                                      i++) {
+                                    if ((mypost["müze"] as List)[i]['ad'] ==
+                                        data.muzeAd) {
+                                      print("if için");
+                                      var x = (mypost["müze"] as List);
+
+                                      x.removeAt(i);
+                                      print(x);
+                                      _authService.DeleteFavMuseum(x);
+                                      print("test2");
+                                      a = Icons.favorite_border_rounded;
+                                    } else {
+                                      print("else içi");
+                                      _authService.FavMuseum(
+                                          data.muzeAd, data.bresim);
+                                      a = Icons.favorite;
+                                    }
+                                  }
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  alignment: Alignment.topRight,
+                                  child: Icon(
+                                    a,
+                                    textDirection: TextDirection.rtl,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              );
+                            }
+                          }),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 14),
                         alignment: Alignment.topLeft,

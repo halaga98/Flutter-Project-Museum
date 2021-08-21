@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "177583971321",
+    "project_id": "museumsproject-1c425",
+    "storage_bucket": "museumsproject-1c425.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177583971321:android:76f2097003450961047b28",
+        "android_client_info": {
+          "package_name": "com.example.untitled1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177583971321-cphquglbav27e8dc8jvm9kethcs1172r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.untitled1",
+            "certificate_hash": "0db60af703a9dc0b98f595e5b0862a6883512640"
+          }
+        },
+        {
+          "client_id": "177583971321-upjeo8habdpgcfke10do3ftbindk4hlv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACORzRPgr0gdqdM2s08a77yTDnVSiTXTE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177583971321-upjeo8habdpgcfke10do3ftbindk4hlv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
