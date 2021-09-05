@@ -159,6 +159,18 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       InkWell(
                         onTap: () {
+                          if (_passwordAgainController.text !=
+                              _passwordController.text) {
+                            Fluttertoast.showToast(
+                                msg: "Şifreler Uyuşmuyor",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                            return;
+                          }
                           _authService.SignUp(
                                   _nameController.text,
                                   _emailController.text,
@@ -166,7 +178,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               .then((value) {
                             Fluttertoast.showToast(
                                 msg: value == null
-                                    ? "Kayıt Başarasız"
+                                    ? "Kayıt Başarısız"
                                     : "Kayıt Başarılı",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
@@ -176,9 +188,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 fontSize: 16.0);
                             _authService.singOut();
                             if (value == null)
-                              return Get.to(() => RegisterPage());
+                              return Get.off(() => RegisterPage());
                             else
-                              return Get.to(() => LoginPage());
+                              return Get.off(() => LoginPage());
                           });
                         },
                         child: Container(

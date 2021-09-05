@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:untitled1/BottomNavigator.dart';
 import 'package:untitled1/Json_Museum.dart';
+import 'package:untitled1/Login/ForgetPassword.dart';
 import 'package:untitled1/Login/SignUp.dart';
 import 'package:untitled1/Login/auth.dart';
 
@@ -97,7 +99,26 @@ class _LoginPageState extends State<LoginPage> {
                         )),
                       )),
                   SizedBox(
-                    height: size.height * 0.08,
+                    height: size.height * 0.02,
+                  ),
+                  Row(
+                    textDirection: TextDirection.rtl,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => ForgetPassword());
+                        },
+                        child: Text(
+                          "Şifremi Unuttum",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: size.height * 0.03,
                   ),
                   InkWell(
                     onTap: () {
@@ -107,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                           .then((value) {
                         Fluttertoast.showToast(
                             msg: value == null
-                                ? "Giriş Başarasız"
+                                ? "Giriş Başarısız"
                                 : "Giriş Başarılı",
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
@@ -116,9 +137,9 @@ class _LoginPageState extends State<LoginPage> {
                             textColor: Colors.white,
                             fontSize: 16.0);
                         if (value == null)
-                          return Get.to(() => LoginPage());
+                          return Get.off(() => LoginPage());
                         else
-                          return Get.to(() => JsonMuseum());
+                          return Get.off(() => MyHomePage());
                       });
                     },
                     child: Container(
@@ -166,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

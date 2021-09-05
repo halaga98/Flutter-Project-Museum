@@ -5,15 +5,13 @@ import 'package:untitled1/Login/auth.dart';
 
 AuthService _authService = AuthService();
 
-class PasswordUpdate extends StatefulWidget {
-  final String mail;
-  const PasswordUpdate({required this.mail});
-
+class ForgetPassword extends StatefulWidget {
   @override
-  _PasswordUpdateState createState() => _PasswordUpdateState();
+  _ForgetPasswordState createState() => _ForgetPasswordState();
 }
 
-class _PasswordUpdateState extends State<PasswordUpdate> {
+class _ForgetPasswordState extends State<ForgetPassword> {
+  final TextEditingController _emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +27,9 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
           children: [
             ListTile(
               leading: Icon(Icons.person),
-              title: Text(widget.mail),
+              title: TextField(
+                controller: _emailController,
+              ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.horizontal(
                     left: Radius.circular(300), right: Radius.circular(300)),
@@ -38,15 +38,16 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
             ),
             InkWell(
               onTap: () {
-                _authService.UpdatePassword(widget.mail);
+                _authService.UpdatePassword(_emailController.text);
                 Fluttertoast.showToast(
                     msg: "Mail Gönderildi",
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
+                    timeInSecForIosWeb: 2,
                     backgroundColor: Colors.red,
                     textColor: Colors.white,
                     fontSize: 16.0);
+
                 Get.back();
               },
               child: Padding(

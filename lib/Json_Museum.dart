@@ -42,7 +42,6 @@ class _JsonMuseumState extends State<JsonMuseum> {
     } else {
       throw Exception("Bağlanamadı ${response.statusCode}");
     }
-    {}
   }
 
   @override
@@ -50,20 +49,6 @@ class _JsonMuseumState extends State<JsonMuseum> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: GestureDetector(
-                onTap: () {
-                  if (_authService.CurrentUser() == null) {
-                    Get.to(() => LoginPage());
-                  } else {
-                    Get.to(() => HomePage());
-                  }
-                },
-                child: Icon(Icons.login)),
-          ),
-        ],
         title: Text("Museums"),
       ),
       body: FutureBuilder(

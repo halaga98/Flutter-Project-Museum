@@ -2,9 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:untitled1/BottomNavigator.dart';
 import 'package:untitled1/Comment/comment_service.dart';
 import 'package:untitled1/Json_Museum.dart';
 import 'package:untitled1/Login/auth.dart';
+import 'package:untitled1/MainHomePage/MainHomePage.dart';
 import 'package:untitled1/Profile/UserAccontsDrawer.dart';
 import 'package:untitled1/Profile/profile.dart';
 
@@ -122,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                       title: Text('Anasayfa'),
                       leading: Icon(Icons.home),
                       onTap: () {
-                        Get.to(() => JsonMuseum());
+                        Get.to(() => MyHomePage());
                       },
                     ),
                     ListTile(
@@ -141,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                       title: Text('Çıkış yap'),
                       onTap: () {
                         _authService.singOut();
-                        Get.to(() => JsonMuseum());
+                        Get.offAll(() => MyHomePage());
                       },
                       leading: Icon(Icons.remove_circle),
                     ),
