@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/Login/auth.dart';
-import 'package:untitled1/Model/Museum_Model.dart';
-import 'package:untitled1/MusemCardLogedIn.dart';
+import 'package:Muzeler/Login/auth.dart';
+import 'package:Muzeler/Model/Museum_Model.dart';
+import 'package:Muzeler/MusemCardLogedIn.dart';
 
 import 'museum_card.dart';
 

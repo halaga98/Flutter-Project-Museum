@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:untitled1/BottomNavigator.dart';
-import 'package:untitled1/Json_Museum.dart';
-import 'package:untitled1/Login/ForgetPassword.dart';
-import 'package:untitled1/Login/SignUp.dart';
-import 'package:untitled1/Login/auth.dart';
+import 'package:Muzeler/BottomNavigator.dart';
+import 'package:Muzeler/Json_Museum.dart';
+import 'package:Muzeler/Login/ForgetPassword.dart';
+import 'package:Muzeler/Login/SignUp.dart';
+import 'package:Muzeler/Login/auth.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -139,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (value == null)
                           return Get.off(() => LoginPage());
                         else
-                          return Get.off(() => MyHomePage());
+                          return Get.offAll(() => MyHomePage());
                       });
                     },
                     child: Container(

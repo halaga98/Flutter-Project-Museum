@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/Model/Museums.dart';
+import 'package:Muzeler/Model/Museums.dart';
 
 class MuseumInfo extends StatelessWidget {
   final Museums selectedMuseum;

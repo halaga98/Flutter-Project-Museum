@@ -5,9 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:untitled1/Login/HomePage.dart';
-import 'package:untitled1/Login/LoginPageDesign.dart';
-import 'package:untitled1/Model/Museum_Model.dart';
+import 'package:Muzeler/Login/HomePage.dart';
+import 'package:Muzeler/Login/LoginPageDesign.dart';
+import 'package:Muzeler/Model/Museum_Model.dart';
 
 import 'City_card.dart';
 import 'Login/auth.dart';
@@ -27,7 +27,7 @@ class _JsonMuseumState extends State<JsonMuseum> {
   Future _gonderi() async {
     final response = await http.get(
       Uri.parse(
-          "https://eu-central-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/museum-yfasf/service/Api/incoming_webhook/webhook0?secret=halaga"),
+          "https://raw.githubusercontent.com/muzea1/Muze/main/AllMuseum.json"),
     );
     if (response.statusCode == 200) {
       List<MuseumModel> _museumList = [];
@@ -49,7 +49,7 @@ class _JsonMuseumState extends State<JsonMuseum> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Museums"),
+        title: Text("Müzeler"),
       ),
       body: FutureBuilder(
           future: _gonderi(),

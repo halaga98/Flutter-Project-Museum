@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:untitled1/Login/LoginPageDesign.dart';
-import 'package:untitled1/Login/auth.dart';
+import 'package:intl/intl.dart';
+import 'package:Muzeler/Login/LoginPageDesign.dart';
+import 'package:Muzeler/Login/auth.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -155,7 +157,24 @@ class _RegisterPageState extends State<RegisterPage> {
                             )),
                           )),
                       SizedBox(
-                        height: size.height * 0.08,
+                        height: size.height * 0.006,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              Get.to(() => LoginPage());
+                            },
+                            child: Text(
+                              "Zaten Kayıtlı mısınız ?",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: size.height * 0.06,
                       ),
                       InkWell(
                         onTap: () {

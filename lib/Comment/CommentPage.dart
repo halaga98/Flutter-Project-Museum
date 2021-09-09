@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled1/Comment/ListTile.dart';
-import 'package:untitled1/Login/auth.dart';
-import 'package:untitled1/Model/Museum_Model.dart';
+import 'package:Muzeler/Comment/ListTile.dart';
+import 'package:Muzeler/Login/auth.dart';
+import 'package:Muzeler/Model/Museum_Model.dart';
 
 import 'comment_service.dart';
 

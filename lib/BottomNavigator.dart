@@ -1,10 +1,10 @@
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled1/Json_Museum.dart';
-import 'package:untitled1/Login/HomePage.dart';
-import 'package:untitled1/Login/LoginPageDesign.dart';
-import 'package:untitled1/Login/auth.dart';
-import 'package:untitled1/MainHomePage/MainHomePage.dart';
+import 'package:Muzeler/Json_Museum.dart';
+import 'package:Muzeler/Login/HomePage.dart';
+import 'package:Muzeler/Login/LoginPageDesign.dart';
+import 'package:Muzeler/Login/auth.dart';
+import 'package:Muzeler/MainHomePage/MainHomePage.dart';
 
 AuthService _authService = AuthService();
 
@@ -29,12 +29,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: FancyBottomNavigation(
         tabs: [
-          TabData(iconData: Icons.home, title: "Home"),
+          TabData(iconData: Icons.home, title: "Ana Sayfa"),
           TabData(
             iconData: Icons.search,
-            title: "Search",
+            title: "Arama",
           ),
-          TabData(iconData: Icons.account_circle, title: "Profile")
+          TabData(iconData: Icons.account_circle, title: "Profil")
         ],
         initialSelection: 0,
         key: bottomNavigationKey,

@@ -6,7 +6,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:untitled1/Comment/comment_service.dart';
+import 'package:Muzeler/Comment/comment_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'Comment/CommentPage.dart';
@@ -61,7 +61,7 @@ class _MuseumDetailScreenState extends State<MuseumDetailScreen>
     _scrollController = ScrollController()
       ..addListener(() {
         setState(() {
-          if (_scrollController.offset <= 700) {
+          if (_scrollController.offset >= 700) {
             _showBackToTopButton = false; // show the back-to-top button
           } else {
             _showBackToTopButton = true; // hide the back-to-top button
@@ -159,7 +159,7 @@ class _MuseumDetailScreenState extends State<MuseumDetailScreen>
                               style: TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.bold),
                             ),
-                          ),
+                          )
                         ],
                       ),
                       Divider(
@@ -206,6 +206,11 @@ class _MuseumDetailScreenState extends State<MuseumDetailScreen>
                           widget.data.muzeTel,
                         ),
                         leading: Icon(Icons.phone),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.credit_card_sharp),
+                        title: Text("Müze Kart :"),
+                        subtitle: Text(widget.data.muzekart),
                       ),
                       ListTile(
                         title: Text("E-Posta : "),

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled1/Comment/comment_service.dart';
-import 'package:untitled1/Login/auth.dart';
-import 'package:untitled1/Model/Museum_Model.dart';
+import 'package:Muzeler/Comment/comment_service.dart';
+import 'package:Muzeler/Login/auth.dart';
+import 'package:Muzeler/Model/Museum_Model.dart';
 
 import 'custom_cached_network_image.dart';
 import 'museum_detail.dart';

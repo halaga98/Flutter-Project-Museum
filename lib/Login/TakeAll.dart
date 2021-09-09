@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled1/Comment/comment_service.dart';
-import 'package:untitled1/Login/auth.dart';
+import 'package:Muzeler/Comment/comment_service.dart';
+import 'package:Muzeler/Login/auth.dart';
 
 CommentServise _commentServise = CommentServise();
 AuthService _authService = AuthService();

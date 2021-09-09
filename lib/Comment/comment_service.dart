@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:core';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:untitled1/Login/auth.dart';
-import 'package:untitled1/Model/comment_model.dart';
+import 'package:Muzeler/Login/auth.dart';
+import 'package:Muzeler/Model/comment_model.dart';
 
 class CommentServise {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;

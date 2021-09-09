@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/Eski/Museum_Item.dart';
-import 'package:untitled1/Model/Museums.dart';
+import 'package:Muzeler/Eski/Museum_Item.dart';
+import 'package:Muzeler/Model/Museums.dart';
 
 import '../Data/Mydatas.dart';
 

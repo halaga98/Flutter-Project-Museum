@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:untitled1/Comment/comment_service.dart';
-import 'package:untitled1/Login/auth.dart';
-import 'package:untitled1/Profile/UpdateName.dart';
-import 'package:untitled1/Profile/picture_service.dart';
+import 'package:Muzeler/Comment/comment_service.dart';
+import 'package:Muzeler/Login/auth.dart';
+import 'package:Muzeler/Profile/UpdateName.dart';
+import 'package:Muzeler/Profile/picture_service.dart';
 
 import 'Password_Update.dart';
 
