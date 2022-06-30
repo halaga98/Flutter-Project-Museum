@@ -1,16 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:Muzeler/BottomNavigator.dart';
-import 'package:Muzeler/Json_Museum.dart';
+import 'package:untitled1/BottomNavigator.dart';
+import 'package:untitled1/Json_Museum.dart';
 
-import 'introduction_screen/introductionscreen.dart';
+import 'Pages/introduction_screen/introductionscreen.dart';
 
 late bool a = false;
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(App());
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+    runApp(App());
+  });
 }
 
 class App extends StatefulWidget {

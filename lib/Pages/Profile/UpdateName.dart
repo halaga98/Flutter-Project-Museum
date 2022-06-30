@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:Muzeler/Login/auth.dart';
+import 'package:untitled1/Pages/Login/auth.dart';
 
 AuthService _authService = AuthService();
 
-class ForgetPassword extends StatefulWidget {
+class UpdateName extends StatefulWidget {
+  final String name;
+  const UpdateName({required this.name});
+
   @override
-  _ForgetPasswordState createState() => _ForgetPasswordState();
+  _UpdateNameState createState() => _UpdateNameState();
 }
 
-class _ForgetPasswordState extends State<ForgetPassword> {
-  final TextEditingController _emailController = TextEditingController();
+class _UpdateNameState extends State<UpdateName> {
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _nameController =
+        TextEditingController(text: widget.name);
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: FlexibleSpaceBar(
           background: Image.asset("images/big-museum.png"),
         ),
-        title: Text("Şifre Değiştirme"),
+        title: Text("Kullanıcı Adı Değiştirme"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -28,7 +32,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             ListTile(
               leading: Icon(Icons.person),
               title: TextField(
-                controller: _emailController,
+                controller: _nameController,
               ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.horizontal(
@@ -38,17 +42,16 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             ),
             InkWell(
               onTap: () {
-                _authService.UpdatePassword(_emailController.text);
+                _authService.UpdateUserName(_nameController.text);
                 Fluttertoast.showToast(
-                    msg: "Mail Gönderildi",
+                    msg: "Kaydedildi",
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 2,
+                    timeInSecForIosWeb: 1,
                     backgroundColor: Colors.red,
                     textColor: Colors.white,
                     fontSize: 16.0);
-
-                Get.back();
+                Get.back(result: _nameController.text);
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -65,7 +68,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     padding: const EdgeInsets.all(5.0),
                     child: Center(
                         child: Text(
-                      "Gönder",
+                      "Kaydet",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,

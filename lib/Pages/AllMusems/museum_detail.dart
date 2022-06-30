@@ -4,16 +4,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:Muzeler/Comment/comment_service.dart';
+import 'package:untitled1/Pages/Comment/CommentPage.dart';
+import 'package:untitled1/Pages/Comment/comment_service.dart';
+import 'package:untitled1/Pages/Login/LoginPageDesign.dart';
+import 'package:untitled1/Pages/Login/auth.dart';
+import 'package:untitled1/Pages/Profile/picture_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'Comment/CommentPage.dart';
-import 'Login/LoginPageDesign.dart';
-import 'Login/auth.dart';
-import 'Model/Museum_Model.dart';
-import 'custom_cached_network_image.dart';
+import '../../Model/Museum_Model.dart';
+import '../../Custom/custom_cached_network_image.dart';
 
 class MuseumDetailScreen extends StatefulWidget {
   final Datum data;
@@ -26,6 +28,7 @@ class MuseumDetailScreen extends StatefulWidget {
 class _MuseumDetailScreenState extends State<MuseumDetailScreen>
     with TickerProviderStateMixin {
   CommentServise _commentServise = CommentServise();
+  StorageService _storageService = StorageService();
 
   AuthService _authService = AuthService();
 
@@ -54,14 +57,18 @@ class _MuseumDetailScreenState extends State<MuseumDetailScreen>
 
   ScrollController _scrollController = new ScrollController();
   bool _showBackToTopButton = true;
-
+  final ImagePicker _imagePicker = ImagePicker();
+  dynamic _imagePick;
+  XFile? profileImage;
+  String Url = "";
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController()
       ..addListener(() {
         setState(() {
-          if (_scrollController.offset >= 700) {
+          if (_scrollController.offset >=
+              _scrollController.position.maxScrollExtent) {
             _showBackToTopButton = false; // show the back-to-top button
           } else {
             _showBackToTopButton = true; // hide the back-to-top button
@@ -83,7 +90,16 @@ class _MuseumDetailScreenState extends State<MuseumDetailScreen>
     // TODO: implement build
     return Scaffold(
       floatingActionButton: _showBackToTopButton == false
-          ? null
+          ? FloatingActionButton(
+              onPressed: () {
+                _scrollController.animateTo(
+                    _scrollController.position.minScrollExtent,
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.linear);
+                setState(() {});
+              },
+              child: Icon(Icons.arrow_upward),
+            )
           : FloatingActionButton(
               onPressed: () {
                 _scrollController.animateTo(
@@ -227,60 +243,87 @@ class _MuseumDetailScreenState extends State<MuseumDetailScreen>
                             Get.to(() => LoginPage());
                           } else {
                             showModalBottomSheet(
-                              isScrollControlled: true,
-                              context: context,
-                              backgroundColor: Colors.white,
-                              builder: (context) => Padding(
-                                padding: MediaQuery.of(context).viewInsets,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: ListTile(
-                                        title: TextField(
-                                          controller: _commentController,
-                                          decoration: InputDecoration(
-                                              hintText: "Yorum yazınız..."),
-                                          autofocus: true,
+                                isScrollControlled: true,
+                                context: context,
+                                backgroundColor: Colors.white,
+                                builder: (context) => StatefulBuilder(builder:
+                                        (BuildContext context,
+                                            StateSetter setState) {
+                                      return Padding(
+                                        padding:
+                                            MediaQuery.of(context).viewInsets,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: ListTile(
+                                                title: TextField(
+                                                  controller:
+                                                      _commentController,
+                                                  decoration: InputDecoration(
+                                                    hintText:
+                                                        "Yorum yazınız...",
+                                                  ),
+                                                  autofocus: true,
+                                                ),
+                                                leading: GestureDetector(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      _showPicker(context);
+                                                    });
+                                                  },
+                                                  child: CircleAvatar(
+                                                      child: Icon(
+                                                          Icons.photo_camera)),
+                                                ),
+                                                trailing: GestureDetector(
+                                                    onTap: () async {
+                                                      await _commentServise
+                                                          .addStatus(
+                                                              _authService
+                                                                  .CurrentUserId(),
+                                                              yildiz,
+                                                              _commentController
+                                                                  .text,
+                                                              widget.data.muzeAd
+                                                                  .toLowerCase(),
+                                                              Url.isNullOrBlank!
+                                                                  ? ""
+                                                                  : Url);
+                                                      setState(() {
+                                                        Url = "";
+                                                        _commentController
+                                                            .clear();
+                                                      });
+
+                                                      Get.back();
+                                                    },
+                                                    child: Icon(Icons.send)),
+                                              ),
+                                            ),
+                                            RatingBar.builder(
+                                              initialRating: 3,
+                                              minRating: 1,
+                                              direction: Axis.horizontal,
+                                              allowHalfRating: true,
+                                              itemCount: 5,
+                                              itemPadding: EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
+                                              itemBuilder: (context, _) => Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                              ),
+                                              onRatingUpdate: (rating) {
+                                                yildiz = rating;
+                                                print(rating);
+                                              },
+                                            ),
+                                          ],
                                         ),
-                                        leading: CircleAvatar(
-                                            child: Icon(Icons.face)),
-                                        trailing: GestureDetector(
-                                            onTap: () {
-                                              _commentServise.addStatus(
-                                                  _authService.CurrentUserId(),
-                                                  yildiz,
-                                                  _commentController.text,
-                                                  widget.data.muzeAd
-                                                      .toLowerCase());
-                                              _commentController.clear();
-                                              Get.back();
-                                            },
-                                            child: Icon(Icons.send)),
-                                      ),
-                                    ),
-                                    RatingBar.builder(
-                                      initialRating: 3,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 5,
-                                      itemPadding:
-                                          EdgeInsets.symmetric(horizontal: 4.0),
-                                      itemBuilder: (context, _) => Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      onRatingUpdate: (rating) {
-                                        yildiz = rating;
-                                        print(rating);
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
+                                      );
+                                    }));
                           }
                         },
                       ),
@@ -303,5 +346,75 @@ class _MuseumDetailScreenState extends State<MuseumDetailScreen>
         ),
       ),
     );
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Photo Library'),
+                      onTap: () async {
+                        await _onImageButtonPressed(ImageSource.gallery,
+                            context: context);
+
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () async {
+                      await _onImageButtonPressed(ImageSource.camera,
+                          context: context);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  Future<void> _onImageButtonPressed(ImageSource source,
+      {required BuildContext context}) async {
+    print("set sttaeeasease üstü");
+    setState(() {});
+
+    final pickedFile = await _imagePicker.pickImage(
+      source: source,
+      imageQuality: 75,
+    );
+    print("set sttaeeasease");
+    profileImage = pickedFile;
+    print("dosyaya geldim: $profileImage");
+    var image = await _authService.UploadMediaForComment(profileImage!);
+    Url = image;
+    print("image" + image);
+    if (profileImage != null) {
+      setState(() {});
+
+      /* var myValueListenable;
+          ValueListenableBuilder(
+              valueListenable: myValueListenable,
+              builder: (context, value, _) {
+                return Provider.value(
+                  value: value,
+                  child: HomePage(),
+                );
+              });*/
+    }
+
+    print('aaa');
+    try {} catch (e) {
+      setState(() {
+        print("Image Error: ");
+      });
+    }
   }
 }

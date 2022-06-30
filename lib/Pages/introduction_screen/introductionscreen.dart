@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:Muzeler/Login/SignUp.dart';
+import 'package:untitled1/Pages/Login/SignUp.dart';
 
-import '../BottomNavigator.dart';
+import '../../BottomNavigator.dart';
 
 class OnBoardingPage extends StatefulWidget {
   @override
@@ -101,7 +101,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           ),
           title: "Müzeler",
           body:
-              "Kayıt olarak müzeler hakkında yorum yapabilir favori müzelerinizi profilinize ekliyebilir ve profilinizi düzenliyebilirsiniz.",
+              "Kayıt olarak müzeler hakkında yorum yapabilir favori müzelerinizi profilinize ekleyebilir ve profilinizi düzenleyebilirsiniz.",
           image: _buildFullscrenImage("Kapadokya1.jpg"),
           decoration: pageDecoration.copyWith(
             pageColor: Colors.white30,

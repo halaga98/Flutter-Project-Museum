@@ -1,10 +1,12 @@
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:Muzeler/Json_Museum.dart';
-import 'package:Muzeler/Login/HomePage.dart';
-import 'package:Muzeler/Login/LoginPageDesign.dart';
-import 'package:Muzeler/Login/auth.dart';
-import 'package:Muzeler/MainHomePage/MainHomePage.dart';
+import 'package:untitled1/Json_Museum.dart';
+
+
+import 'Pages/Login/HomePage.dart';
+import 'Pages/Login/LoginPageDesign.dart';
+import 'Pages/Login/auth.dart';
+import 'Pages/MainHomePage/MainHomePage.dart';
 
 AuthService _authService = AuthService();
 

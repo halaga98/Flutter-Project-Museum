@@ -8,12 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:Muzeler/Comment/comment_service.dart';
-import 'package:Muzeler/Login/HomePage.dart';
-import 'package:Muzeler/Login/LoginPageDesign.dart';
-import 'package:Muzeler/Login/auth.dart';
-import 'package:Muzeler/Model/Museum_Model.dart';
-import 'package:Muzeler/museum_detail.dart';
+
+import 'package:untitled1/Model/Museum_Model.dart';
+import 'package:untitled1/Pages/AllMusems/museum_detail.dart';
+import 'package:untitled1/Pages/Comment/comment_service.dart';
+import 'package:untitled1/Pages/Login/auth.dart';
 
 class MainHomePage extends StatefulWidget {
   MainHomePage({Key? key}) : super(key: key);
@@ -154,10 +153,13 @@ class _MainHomePageState extends State<MainHomePage> {
                                 );
                               },
                               options: CarouselOptions(
+                                autoPlayAnimationDuration:
+                                    Duration(milliseconds: 700),
+                                autoPlayCurve: Curves.easeInOutBack,
                                 autoPlay: true,
                                 enlargeCenterPage: true,
-                                viewportFraction: 0.9,
-                                aspectRatio: 1.9,
+                                viewportFraction: 0.75,
+                                aspectRatio: 1.75,
                                 initialPage: 1,
                               ),
                             ),
@@ -257,10 +259,11 @@ class _MainHomePageState extends State<MainHomePage> {
                                 );
                               },
                               options: CarouselOptions(
+                                autoPlayCurve: Curves.easeInOutBack,
                                 autoPlay: true,
                                 enlargeCenterPage: true,
-                                viewportFraction: 0.9,
-                                aspectRatio: 1.9,
+                                viewportFraction: 0.75,
+                                aspectRatio: 1.75,
                                 initialPage: 1,
                               ),
                             ),

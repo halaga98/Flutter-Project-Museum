@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:Muzeler/Comment/comment_service.dart';
-import 'package:Muzeler/Login/auth.dart';
-import 'package:Muzeler/Model/Museum_Model.dart';
+import 'package:untitled1/Model/Museum_Model.dart';
+import 'package:untitled1/Pages/Comment/comment_service.dart';
+import 'package:untitled1/Pages/Login/auth.dart';
 
-import 'custom_cached_network_image.dart';
+import '../../Custom/custom_cached_network_image.dart';
 import 'museum_detail.dart';
 
 AuthService _authService = AuthService();
@@ -125,7 +125,21 @@ class MuseumCardLogedIn extends StatelessWidget {
                                   print("asdasd");
                                   if ((mypost["müze"] as List).length == 0) {
                                     _authService.FavMuseum(
-                                        data.muzeAd, data.bresim);
+                                      data.muzeAd,
+                                      data.bresim,
+                                      data.muzeAciklama,
+                                      data.calismaSaatleri,
+                                      data.girisDetay,
+                                      data.latitude,
+                                      data.longitude,
+                                      data.muzeAdres,
+                                      data.muzeMail,
+                                      data.muzeTel,
+                                      data.muzeWebSite,
+                                      data.sehir,
+                                      data.ilce,
+                                      data.muzekart,
+                                    );
                                     a = Icons.favorite;
                                     return;
                                   }
@@ -144,8 +158,25 @@ class MuseumCardLogedIn extends StatelessWidget {
                                       a = Icons.favorite_border_rounded;
                                     } else {
                                       print("else içi");
+                                      print(
+                                        data.latitude,
+                                      );
                                       _authService.FavMuseum(
-                                          data.muzeAd, data.bresim);
+                                        data.muzeAd,
+                                        data.bresim,
+                                        data.muzeAciklama,
+                                        data.calismaSaatleri,
+                                        data.girisDetay,
+                                        data.latitude,
+                                        data.longitude,
+                                        data.muzeAdres,
+                                        data.muzeMail,
+                                        data.muzeTel,
+                                        data.muzeWebSite,
+                                        data.sehir,
+                                        data.ilce,
+                                        data.muzekart,
+                                      );
                                       a = Icons.favorite;
                                     }
                                   }

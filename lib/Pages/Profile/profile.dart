@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:Muzeler/Comment/comment_service.dart';
-import 'package:Muzeler/Login/auth.dart';
-import 'package:Muzeler/Profile/UpdateName.dart';
-import 'package:Muzeler/Profile/picture_service.dart';
+import 'package:untitled1/Pages/Comment/comment_service.dart';
+import 'package:untitled1/Pages/Login/auth.dart';
+import 'package:untitled1/Pages/Profile/picture_service.dart';
 
 import 'Password_Update.dart';
+import 'UpdateName.dart';
 
 AuthService _authService = AuthService();
 CommentServise _commentServise = CommentServise();
@@ -173,8 +173,8 @@ class _ProfilPageState extends State<ProfilPage> {
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
                       title: new Text('Photo Library'),
-                      onTap: () {
-                        _onImageButtonPressed(ImageSource.gallery,
+                      onTap: () async {
+                        await _onImageButtonPressed(ImageSource.gallery,
                             context: context);
 
                         Navigator.of(context).pop();
@@ -182,8 +182,8 @@ class _ProfilPageState extends State<ProfilPage> {
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
                     title: new Text('Camera'),
-                    onTap: () {
-                      _onImageButtonPressed(ImageSource.camera,
+                    onTap: () async {
+                      await _onImageButtonPressed(ImageSource.camera,
                           context: context);
                       Navigator.of(context).pop();
                     },
@@ -195,7 +195,7 @@ class _ProfilPageState extends State<ProfilPage> {
         });
   }
 
-  void _onImageButtonPressed(ImageSource source,
+  Future<void> _onImageButtonPressed(ImageSource source,
       {required BuildContext context}) async {
     print("set sttaeeasease üstü");
     setState(() {});
@@ -206,7 +206,7 @@ class _ProfilPageState extends State<ProfilPage> {
     print("dosyaya geldim: $profileImage");
     var image = await _authService.UploadMedia(profileImage!);
     if (profileImage != null) {
-      _storageService.deleteImage(widget.image);
+      await _storageService.deleteImage(widget.image);
       widget.image = image;
       setState(() {});
 

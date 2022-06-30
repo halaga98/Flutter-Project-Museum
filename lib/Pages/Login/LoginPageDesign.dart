@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:Muzeler/BottomNavigator.dart';
-import 'package:Muzeler/Json_Museum.dart';
-import 'package:Muzeler/Login/ForgetPassword.dart';
-import 'package:Muzeler/Login/SignUp.dart';
-import 'package:Muzeler/Login/auth.dart';
+import 'package:untitled1/BottomNavigator.dart';
+import 'package:untitled1/Json_Museum.dart';
+
+import 'ForgetPassword.dart';
+import 'SignUp.dart';
+import 'auth.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -29,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
           height: size.height * .5,
           width: size.width * .85,
           decoration: BoxDecoration(
-              color: Colors.blue.withOpacity(.75),
+              color: Colors.blueGrey.withOpacity(0.9),
               borderRadius: BorderRadius.all(Radius.circular(20)),
               boxShadow: [
                 BoxShadow(

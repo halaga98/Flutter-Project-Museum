@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:Muzeler/Profile/picture_service.dart';
+import 'package:untitled1/Model/Museum_Model.dart';
+import 'package:untitled1/Pages/Profile/picture_service.dart';
 
 class AuthService {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -62,6 +63,17 @@ class AuthService {
     }
   }
 
+  UploadMediaForComment(XFile pickedFile) async {
+    bool succ = true;
+    try {
+      MediaUrl = await _storageService.uploadMedia(File(pickedFile.path));
+      return MediaUrl;
+    } catch (e) {
+      succ = false;
+      return succ;
+    }
+  }
+
   UpdateUserName(String name) async {
     return await _firestore
         .collection("Person")
@@ -73,10 +85,39 @@ class AuthService {
     return await _auth.sendPasswordResetEmail(email: mail);
   }
 
-  FavMuseum(String muzaAd, String muzaResim) async {
+  FavMuseum(
+      String muzeAd,
+      String muzeResim,
+      String muzeAciklama,
+      String calismaSaatleri,
+      String girisDetay,
+      Itude latitude,
+      Itude longitude,
+      String muzeAdres,
+      String muzeMail,
+      String muzeTel,
+      String muzeWebSite,
+      String sehir,
+      String ilce,
+      String muzekart) async {
     _firestore.collection("Person").doc(_auth.currentUser!.uid).update({
       "müze": FieldValue.arrayUnion([
-        {"ad": muzaAd, "resim": muzaResim}
+        {
+          "ad": muzeAd,
+          "muzeAciklama": muzeAciklama,
+          "calismaSaatleri": calismaSaatleri,
+          "girisDetay": girisDetay,
+          "latitude": latitude.numberDouble,
+          "longitude": longitude.numberDouble,
+          "muzeAdres": muzeAdres,
+          "muzeMail": muzeMail,
+          "muzeTel": muzeTel,
+          "muzeWebSite": muzeWebSite,
+          "sehir": sehir,
+          "ilce": ilce,
+          "muzekart": muzekart,
+          "resim": muzeResim
+        }
       ]),
     });
     /*return await _firestore
@@ -87,9 +128,9 @@ class AuthService {
         .set({"müzeAd": muzaAd, "müzeResim": muzaResim});*/
   }
 
-  DeleteFavMuseum(List muzeler) async {
+  DeleteFavMuseum(List untitled1) async {
     _firestore.collection("Person").doc(_auth.currentUser!.uid).update({
-      "müze": muzeler,
+      "müze": untitled1,
     });
   }
 

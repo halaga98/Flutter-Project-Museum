@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:Muzeler/Login/auth.dart';
+
+import 'auth.dart';
 
 AuthService _authService = AuthService();
 
-class UpdateName extends StatefulWidget {
-  final String name;
-  const UpdateName({required this.name});
-
+class ForgetPassword extends StatefulWidget {
   @override
-  _UpdateNameState createState() => _UpdateNameState();
+  _ForgetPasswordState createState() => _ForgetPasswordState();
 }
 
-class _UpdateNameState extends State<UpdateName> {
+class _ForgetPasswordState extends State<ForgetPassword> {
+  final TextEditingController _emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _nameController =
-        TextEditingController(text: widget.name);
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: FlexibleSpaceBar(
           background: Image.asset("images/big-museum.png"),
         ),
-        title: Text("Kullanıcı Adı Değiştirme"),
+        title: Text("Şifre Değiştirme"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -32,7 +29,7 @@ class _UpdateNameState extends State<UpdateName> {
             ListTile(
               leading: Icon(Icons.person),
               title: TextField(
-                controller: _nameController,
+                controller: _emailController,
               ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.horizontal(
@@ -42,16 +39,17 @@ class _UpdateNameState extends State<UpdateName> {
             ),
             InkWell(
               onTap: () {
-                _authService.UpdateUserName(_nameController.text);
+                _authService.UpdatePassword(_emailController.text);
                 Fluttertoast.showToast(
-                    msg: "Kaydedildi",
+                    msg: "Mail Gönderildi",
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
+                    timeInSecForIosWeb: 2,
                     backgroundColor: Colors.red,
                     textColor: Colors.white,
                     fontSize: 16.0);
-                Get.back(result: _nameController.text);
+
+                Get.back();
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -68,7 +66,7 @@ class _UpdateNameState extends State<UpdateName> {
                     padding: const EdgeInsets.all(5.0),
                     child: Center(
                         child: Text(
-                      "Kaydet",
+                      "Gönder",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,

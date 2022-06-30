@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:Muzeler/Login/auth.dart';
+import 'package:untitled1/Pages/Login/auth.dart';
 
 AuthService _authService = AuthService();
 

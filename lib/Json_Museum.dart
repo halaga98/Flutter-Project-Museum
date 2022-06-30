@@ -5,12 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:Muzeler/Login/HomePage.dart';
-import 'package:Muzeler/Login/LoginPageDesign.dart';
-import 'package:Muzeler/Model/Museum_Model.dart';
+import 'package:untitled1/Model/Museum_Model.dart';
+import 'package:untitled1/Pages/Login/auth.dart';
 
-import 'City_card.dart';
-import 'Login/auth.dart';
+import 'Pages/AllMusems/City_card.dart';
 
 class JsonMuseum extends StatefulWidget {
   JsonMuseum({Key? key}) : super(key: key);

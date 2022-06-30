@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:Muzeler/Login/LoginPageDesign.dart';
-import 'package:Muzeler/Login/auth.dart';
+
+import 'LoginPageDesign.dart';
+import 'auth.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -33,7 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
               height: size.height * .7,
               width: size.width * .85,
               decoration: BoxDecoration(
-                  color: Colors.blue.withOpacity(.75),
+                  color: Colors.blueGrey.withOpacity(0.9),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   boxShadow: [
                     BoxShadow(

@@ -2,8 +2,9 @@ import 'dart:async';
 import 'dart:core';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:Muzeler/Login/auth.dart';
-import 'package:Muzeler/Model/comment_model.dart';
+import 'package:flutter/material.dart';
+import 'package:untitled1/Model/comment_model.dart';
+import 'package:untitled1/Pages/Login/auth.dart';
 
 class CommentServise {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -11,12 +12,12 @@ class CommentServise {
 
 // ekleme kısmı
 
-  Future addStatus(
-      String id, double star, String comment, String collection) async {
+  Future addStatus(String id, double star, String comment, String collection,
+      String imageUrl) async {
     var ref = _firestore.collection(collection);
 
-    var documentRef =
-        await ref.add(({"id": id, "star": star, "comment": comment}));
+    var documentRef = await ref.add(
+        ({"id": id, "star": star, "comment": comment, "imageUrl": imageUrl}));
     return commentmodel(id: id, star: star, comment: comment);
   }
 
