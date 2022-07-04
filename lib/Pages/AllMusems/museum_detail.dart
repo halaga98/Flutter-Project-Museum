@@ -230,7 +230,9 @@ class _MuseumDetailScreenState extends State<MuseumDetailScreen>
                       ),
                       ListTile(
                         title: Text("E-Posta : "),
-                        subtitle: Text(widget.data.muzeMail),
+                        subtitle: Text(widget.data.muzeMail == "muze@asist.com "
+                            ? "mobil.muzeler@gmail.com"
+                            : widget.data.muzeMail),
                         leading: Icon(Icons.mail),
                       ),
                       ListTile(

@@ -200,7 +200,8 @@ class _ProfilPageState extends State<ProfilPage> {
     print("set sttaeeasease üstü");
     setState(() {});
 
-    final pickedFile = await _imagePicker.pickImage(source: source);
+    final pickedFile =
+        await _imagePicker.pickImage(source: source, imageQuality: 65);
     print("set sttaeeasease");
     profileImage = pickedFile;
     print("dosyaya geldim: $profileImage");

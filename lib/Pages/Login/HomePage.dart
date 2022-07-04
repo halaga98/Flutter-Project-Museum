@@ -81,34 +81,32 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               Get.to(() => MuseumDetailScreen(
                                     data: Datum(
-                                      muzeAd: mypost["müze"][itemIndex]["ad"],
-                                      bresim: mypost["müze"][itemIndex]
-                                          ["resim"],
-                                      muzeAciklama: mypost["müze"][itemIndex]
-                                          ["muzeAciklama"],
-                                      calismaSaatleri: mypost["müze"][itemIndex]
-                                          ["calismaSaatleri"],
-                                      girisDetay: mypost["müze"][itemIndex]
-                                          ["girisDetay"],
-                                      latitude: Itude(
-                                          numberDouble: mypost["müze"]
-                                              [itemIndex]["latitude"]),
-                                      longitude: Itude(
-                                          numberDouble: mypost["müze"]
-                                              [itemIndex]["longitude"]),
-                                      muzeAdres: mypost["müze"][itemIndex]
-                                          ["muzeAdres"],
-                                      muzeMail: mypost["müze"][itemIndex]
-                                          ["muzeMail"],
-                                      muzeTel: mypost["müze"][itemIndex]
-                                          ["muzeTel"],
-                                      muzeWebSite: mypost["müze"][itemIndex]
-                                          ["muzeWebSite"],
-                                      sehir: mypost["müze"][itemIndex]["sehir"],
-                                      ilce: mypost["müze"][itemIndex]["ilce"],
-                                      muzekart: mypost["müze"][itemIndex]
-                                          ["muzekart"],
-                                    ),
+                                        muzeAd: mypost["müze"][itemIndex]["ad"],
+                                        bresim: mypost["müze"][itemIndex]
+                                            ["resim"],
+                                        muzeAciklama: mypost["müze"][itemIndex]
+                                            ["muzeAciklama"],
+                                        calismaSaatleri: mypost["müze"]
+                                            [itemIndex]["calismaSaatleri"],
+                                        girisDetay: mypost["müze"][itemIndex]
+                                            ["girisDetay"],
+                                        latitude: Itude(
+                                            numberDouble: mypost["müze"]
+                                                [itemIndex]["latitude"]),
+                                        longitude: Itude(
+                                            numberDouble: mypost["müze"]
+                                                [itemIndex]["longitude"]),
+                                        muzeAdres: mypost["müze"][itemIndex]
+                                            ["muzeAdres"],
+                                        muzeMail: mypost["müze"][itemIndex]
+                                            ["muzeMail"],
+                                        muzeTel: mypost["müze"][itemIndex]
+                                            ["muzeTel"],
+                                        muzeWebSite: mypost["müze"][itemIndex]["muzeWebSite"],
+                                        sehir: mypost["müze"][itemIndex]["sehir"],
+                                        ilce: mypost["müze"][itemIndex]["ilce"],
+                                        muzekart: mypost["müze"][itemIndex]["muzekart"],
+                                        category: ""),
                                   ));
                             },
                             child: Container(

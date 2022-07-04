@@ -44,6 +44,7 @@ class Datum {
     required this.sehir,
     required this.ilce,
     required this.muzekart,
+    required this.category,
     required this.bresim,
   });
 
@@ -60,6 +61,8 @@ class Datum {
   String sehir;
   String ilce;
   String muzekart;
+  String category;
+
   String bresim;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -76,6 +79,7 @@ class Datum {
         sehir: utf8.decode(utf8.encode(json["sehir"])),
         ilce: json["ilce"],
         muzekart: json["muzekart"],
+        category: json["category"],
         bresim: json["bresim"],
       );
 
@@ -93,6 +97,7 @@ class Datum {
         "sehir": sehir,
         "ilce": ilce,
         "muzekart": muzekart,
+        "category": category,
         "bresim": bresim,
       };
 }

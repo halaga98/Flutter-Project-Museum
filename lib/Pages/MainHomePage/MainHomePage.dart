@@ -71,6 +71,7 @@ class _MainHomePageState extends State<MainHomePage> {
         child: FutureBuilder(
             future: _gonderi(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
+              print(snapshot.stackTrace);
               if (snapshot.hasData) {
                 return Column(
                   mainAxisSize: MainAxisSize.max,
